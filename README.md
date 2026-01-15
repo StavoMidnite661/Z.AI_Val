@@ -56,21 +56,44 @@ This scaffold provides a robust foundation built with:
 
 ## 🚀 Quick Start
 
+### Option 1: Use the Startup Script (Recommended)
+
+```bash
+# Start ALL services (Next.js + VAL Core + Infrastructure)
+./start.sh start-all
+
+# Check status
+./start.sh status
+
+# Stop all services
+./start.sh stop
+
+# Show all commands
+./start.sh help
+```
+
+### Option 2: Manual Startup
+
 ```bash
 # Install dependencies
 bun install
 
-# Start development server
+# Start Next.js Frontend (Port 3000)
 bun run dev
 
-# Build for production
-bun run build
+# Start VAL Core Backend (Port 3001)
+cd gm-family-trust---val-core--1-
+bun run infra:up  # Start Docker services
+bun run server    # Start backend server
 
-# Start production server
-bun start
+# Open VAL Core Monitor Dashboard
+open monitor.html  # or open in browser
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see your application running.
+### Access URLs
+- **Next.js Frontend**: http://localhost:3000
+- **VAL Core Backend**: http://localhost:3001
+- **Monitor Dashboard**: Open `gm-family-trust---val-core--1-/monitor.html` in browser
 
 ## 🤖 Powered by Z.ai
 
@@ -86,6 +109,9 @@ Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https:
 
 ## 📁 Project Structure
 
+This repository contains **two projects**:
+
+### 1. Next.js Frontend (Port 3000)
 ```
 src/
 ├── app/                 # Next.js App Router pages
@@ -94,6 +120,22 @@ src/
 ├── hooks/              # Custom React hooks
 └── lib/                # Utility functions and configurations
 ```
+
+### 2. VAL Core Backend (Port 3001) - Financial Transaction System
+```
+gm-family-trust---val-core--1-/
+├── val/
+│   ├── adapters/        # External API integrations (Tango, Arcus, Moov, Square)
+│   ├── core/           # Core services (compliance, credit manager, E2E finality)
+│   ├── webhooks/       # Webhook handlers
+│   └── server.ts       # Backend server entry point
+├── monitor.html        # VAL Core monitoring dashboard
+└── docker-compose.yml  # Infrastructure (PostgreSQL, TigerBeetle)
+```
+
+📖 **For complete documentation**, see:
+- **[PROJECT_GUIDE.md](./PROJECT_GUIDE.md)** - Comprehensive project guide
+- **[AGENT_QUICK_REFERENCE.md](./AGENT_QUICK_REFERENCE.md)** - Quick reference for agents
 
 ## 🎨 Available Features & Components
 
